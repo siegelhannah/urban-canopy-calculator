@@ -11,7 +11,7 @@ import os
 
 def get_city_canopy(city_name, state_abbr, years):
     """
-    Download tree canopy data for any US city
+    Download NLCD tree canopy data for any US city via API
     
     Parameters:
         city_name: str (like "Portland")
@@ -43,7 +43,7 @@ def get_city_canopy(city_name, state_abbr, years):
 
 def get_city_tracts(city_boundary, state_abbr, year=2021):
     """
-    Get census tracts that intersect with city boundary
+    Get census tracts that intersect with city boundary via pygris package (census API)
     
     Parameters:
         city_boundary: GeoDataFrame (city boundary from pygris.places() )

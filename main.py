@@ -56,7 +56,7 @@ def analyze_city_canopy(city_name, state_abbr, start_year, end_year, export=True
     # 5. Print summary statistics
     print_summary_stats(tracts_with_analysis, city_name, available_years[0], available_years[-1])
     
-    # 6. Export all outputs (optional)
+    # 6. Export all outputs (maps, files, etc) (optional)
     exports = None
     if export:
         exports = export_all_outputs(
@@ -97,6 +97,8 @@ def print_summary_stats(analysis_gdf, city_name, start_year, end_year):
     print("="*60 + "\n")
 
 
+
+### MAIN FUNCTION WITH COMMAND LINE IMPLEMENTED ###
 def main():
     """Main function that has command line argument parsing"""
     parser = argparse.ArgumentParser(
@@ -104,9 +106,9 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python main.py --city "Portland" --state OR --start-year 2011 --end-year 2021
-  python main.py --city "Seattle" --state WA --start-year 2016 --end-year 2021 --output-dir seattle_results
-  python main.py --city "Austin" --state TX --start-year 2011 --end-year 2019 --no-export
+  python main.py --city "Portland" --state "OR" --start-year 2011 --end-year 2021
+  python main.py --city "Seattle" --state "WA" --start-year 2016 --end-year 2021 --output-dir seattle_results
+  python main.py --city "Austin" --state "TX" --start-year 2011 --end-year 2019 --no-export
         """
     )
     
@@ -118,7 +120,7 @@ Examples:
     
     # Optional arguments    
     parser.add_argument('--no-export', action='store_true', help='Skip exporting visualizations and data files')
-    parser.add_argument('--plot', action='store_true', help='Display matplotlib plot of final year canopy coverage')
+    parser.add_argument('--plot', action='store_true', help='Display supplementary matplotlib plot of final year canopy coverage')
     args = parser.parse_args()
     
     # Validate years
@@ -140,13 +142,21 @@ Examples:
         
         # Optional plot
         if args.plot:
-            print("\nDisplaying plot...")
+            # Use the actual analyzed years, not the requested years
+            # list of all years needed
+            years = list(range(args.start_year, args.end_year + 1))
+            # Filter to only years with NLCD data (2011-2021)
+            available_years = [y for y in years if y in np.arange(2011, 2022)]
+            actual_end_year = available_years[-1]
+
+            print(f"\nDisplaying plot of {actual_end_year} canopy cover data...")
+
             fig, ax = plt.subplots(figsize=(10, 8))
-            canopy_dataset[f'canopy_{args.end_year}'].plot(
+            canopy_dataset[f'canopy_{actual_end_year}'].plot(
                 ax=ax, cmap='Greens', vmin=0, vmax=100
             )
             city_boundary.boundary.plot(ax=ax, color='red', linewidth=2)
-            plt.title(f"{args.city} Tree Canopy Cover {args.end_year} (%)")
+            plt.title(f"{args.city} Tree Canopy Cover {actual_end_year} (%)")
             plt.xlabel("Longitude")
             plt.ylabel("Latitude")
             plt.tight_layout()
@@ -161,68 +171,5 @@ Examples:
 
 
 
-
-
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-# # TODO: implement command line
-# if __name__ == "__main__":
-
-#     portland_city_boundary, portland_analysis, portland_canopy_dataset = analyze_city_canopy(
-#         city_name="Portland",
-#         state_abbr="OR", 
-#         start_year=2011,
-#         end_year=2021)
-
-#     # View results
-#     print("\n=== Summary Statistics ===")
-
-#     # Check what columns we actually have
-#     print("Available columns:", portland_analysis.columns.tolist())
-
-#     # Use the correct tract identifier columns
-#     display_cols = ['NAMELSAD', 'canopy_mean_2011', 'canopy_mean_2021', 
-#                     'canopy_change_pct', 'change_category']
-#     print(portland_analysis[display_cols].head(10))
-#     print('\n\n')
-#     print(portland_analysis.head())
-
-#     # Summary stats
-#     print(f"\nCitywide Summary:")
-#     print(f"Total tracts: {len(portland_analysis)}")
-#     print(f"Mean canopy 2011: {portland_analysis['canopy_mean_2011'].mean():.2f}%")
-#     print(f"Mean canopy 2021: {portland_analysis['canopy_mean_2021'].mean():.2f}%")
-#     print(f"Mean change: {portland_analysis['canopy_change_pct'].mean():.2f} percentage points")
-#     print(f"\nChange categories:")
-#     print(portland_analysis['change_category'].value_counts())
-
-#     ### SIMPLE PLOT: canopy_2021
-#     fig, ax = plt.subplots(figsize=(10, 8))
-#     portland_canopy_dataset['canopy_2021'].plot(ax=ax, cmap='Greens', vmin=0, vmax=100)
-#     portland_city_boundary.boundary.plot(ax=ax, color='red', linewidth=2)
-#     plt.title("Portland Tree Canopy Cover 2021 (%)")
-#     plt.xlabel("Longitude")
-#     plt.ylabel("Latitude")
-#     plt.show()
-
-#     # Export everything
-#     exports = export_all_outputs(
-#         city_boundary=portland_city_boundary,
-#         tracts_gdf=portland_analysis,
-#         canopy_dataset=portland_canopy_dataset,
-#         city_name="Portland",
-#         start_year=2011,
-#         end_year=2021,
-#         years=np.arange(2011, 2022),
-#         output_dir="portland_analysis_outputs"
-#     )
