@@ -13,7 +13,13 @@ This automates a workflow that would otherwise require manual, repetitive geopro
 - CLI interface with simple arguments (city and state name, year range)
 
 ## Installation
-1. Create and activate a virtual environment
+1. Clone the repository
+```python
+git clone https://github.com/siegelhannah/urban-canopy-calculator.git
+cd urban-canopy-calculator
+```
+
+2. Create and activate a virtual environment
 ```python
 # Create environment
 python -m venv venv
@@ -25,7 +31,7 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-2. Install dependencies
+3. Install dependencies
 ```python
 pip install -r requirements.txt
 ```
