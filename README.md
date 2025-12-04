@@ -8,7 +8,7 @@ This automates a workflow that would otherwise require manual, repetitive geopro
 - Automatic download of NLCD canopy datasets (available 2011–2021)
 - Automatic census tract extraction for the selected city
 - Per-tract calculation of canopy statistics for multiple years
-- Computation and categorization of canopy changes (% and acres)
+- Canopy change computation and categorization (% change, acreage change)
 - Optional map and data export for all results
 - CLI interface with simple arguments (city and state name, year range)
 
