@@ -64,16 +64,24 @@ REQUIRED:
 OPTIONAL:
 
 - --no-export: Skip exporting maps + data
-- --plot: Show matplotlib plot of final year canopy
-- --output-dir: Custom folder for exported files
+- --plot: Show supplemental matplotlib plot of final year's raw NLCD canopy coverage data
+- --output-dir: Customize folder name for exported files (default is {city}_{state}_outputs/)
 
-## Example Output
-- Processed canopy dataset (Xarray)
-- Census tracts with per-year canopy metrics
-- Summary statistics (printed to terminal)
+## Outputs
 
-Optional:
+HTML MAP FILES:
+- Yearly maps of mean canopy by census tract
+- Choropleth map of mean canopy change by census tract
 
-- PNG maps
-- GeoPackage / shapefile
-- CSV summary tables
+SHAPEFILES:
+- City boundary shapefile
+- Shapefile with analysis results (includes GEOID, start year mean canopy, end year mean canopy, percent canopy change, change categories, change in acres)
+
+GEODATAFRAMES in multiple formats:
+- Geopackage (for compatibility across ArcPro, Python, etc)
+- CSV with WKT geometry
+
+PRINTED OUTPUTS / PLOTS:
+- Summary statistics printed to terminal
+- Supplementary plot of final year's raw NLCD canopy coverage data
+
