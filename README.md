@@ -14,6 +14,7 @@ This automates a workflow that would otherwise require manual, repetitive geopro
 
 ## Installation
 1. Create and activate a virtual environment
+```python
 # Create environment
 python -m venv venv
 
@@ -22,39 +23,56 @@ venv\Scripts\activate
 
 # Activate (macOS/Linux)
 source venv/bin/activate
+```
+
 2. Install dependencies
+```python
 pip install -r requirements.txt
-Usage
+```
+
+## Usage
 Run the tool from the command line using main.py:
 
-Basic example
-
+Basic example:
+```python
 python main.py --city "Portland" --state OR --start-year 2011 --end-year 2021
+```
+
 With a custom output directory
-
+```python
 python main.py --city "Seattle" --state WA --start-year 2016 --end-year 2021 --output-dir seattle_results
+```
+
 Skip map/data exports
-
+```python
 python main.py --city "Austin" --state TX --start-year 2011 --end-year 2019 --no-export
-Display a canopy map plot
+```
 
+Display a canopy map plot
+```python
 python main.py --city "Denver" --state CO --start-year 2011 --end-year 2021 --plot
-Command Line Arguments
+```
+
+## Command Line Arguments
 REQUIRED:
 
 --city: City name ("Portland", "New York")
 --state: State abbreviation (OR, NY)
 --start-year: Start year (2011–2021)
 --end-year: End year (2011–2021)
+
+
 OPTIONAL:
 
 --no-export: Skip exporting maps + data
 --plot: Show matplotlib plot of final year canopy
 --output-dir: Custom folder for exported files
-Example Output
+
+## Example Output
 Processed canopy dataset (Xarray)
 Census tracts with per-year canopy metrics
 Summary statistics (printed to terminal)
+
 Optional:
 
 PNG maps
