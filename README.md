@@ -1,8 +1,8 @@
 # Urban Canopy Cover Analysis Tool
-A Python-based tool that automatically downloads, processes, and analyzes urban tree canopy change for any U.S. city.
-Given a city name and state, the tool retrieves all required datasets (NLCD canopy layers, census tracts), computes canopy trends across multiple years, produces summary statistics, and exports map visualizations.
+A Python tool that automatically downloads, processes, and analyzes urban tree canopy change for any U.S. city.
+Given a city name, state name, and year range, the tool retrieves all required datasets (NLCD canopy layers, census tracts), computes zonal canopy trends across multiple years, and returns interactive maps, summary statistics, and datasets in multiple file formats.
 
-This automates a workflow that would otherwise require manual geoprocessing in ArcGIS Pro, making analyses reproducible, scalable, and easy to run for any U.S. city.
+This automates a workflow that would otherwise require manual, repetitive geoprocessing in ArcGIS Pro, making this analysis reproducible, scalable, and easy to run for any U.S. city.
 
 ## Features
 - Automatic download of NLCD canopy datasets (2011–2021)
