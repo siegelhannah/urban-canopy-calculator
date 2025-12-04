@@ -67,7 +67,7 @@ def analyze_city_canopy(city_name, state_abbr, start_year, end_year, export=True
             start_year=available_years[0],
             end_year=available_years[-1],
             years=available_years,
-            output_dir=f"{city_name}_outputs"
+            output_dir=f"{city_name}_{state_abbr}_outputs"
         )
 
     return city_boundary, tracts_with_analysis, canopy_dataset, exports
