@@ -56,25 +56,24 @@ python main.py --city "Denver" --state CO --start-year 2011 --end-year 2021 --pl
 ## Command Line Arguments
 REQUIRED:
 
---city: City name ("Portland", "New York")
---state: State abbreviation (OR, NY)
---start-year: Start year (2011–2021)
---end-year: End year (2011–2021)
-
+- --city: City name ("Portland", "New York")
+- --state: State abbreviation (OR, NY)
+- --start-year: Start year (2011–2021)
+- --end-year: End year (2011–2021)
 
 OPTIONAL:
 
---no-export: Skip exporting maps + data
---plot: Show matplotlib plot of final year canopy
---output-dir: Custom folder for exported files
+- --no-export: Skip exporting maps + data
+- --plot: Show matplotlib plot of final year canopy
+- --output-dir: Custom folder for exported files
 
 ## Example Output
-Processed canopy dataset (Xarray)
-Census tracts with per-year canopy metrics
-Summary statistics (printed to terminal)
+- Processed canopy dataset (Xarray)
+- Census tracts with per-year canopy metrics
+- Summary statistics (printed to terminal)
 
 Optional:
 
-PNG maps
-GeoPackage / shapefile
-CSV summary tables
+- PNG maps
+- GeoPackage / shapefile
+- CSV summary tables
